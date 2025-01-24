@@ -3,24 +3,7 @@ import AvrgirlArduino from "avrgirl-arduino";
 
 function App() {
   const boardChoices = [ //Testing values: working | notTested | notWorking
-    { name: "Arduino Uno",                        value: "uno",                        tested: false },
-    { name: "Arduino Mega",                       value: "mega",                       tested: false },
-    { name: "Arduino ADK",                        value: "adk",                        tested: false },
-    { name: "Arduino Nano",                       value: "nano",                       tested: true  },
-    { name: "Arduino Nano (with new bootloader)", value: "nano (new bootloader)",      tested: false },
-    { name: "Arduino Lilypad USB",                value: "lilypad-usb",                tested: false },
-    { name: "Arduino Yun",                        value: "yun",                        tested: false },
-    { name: "Arduino Esplora",                    value: "esplora",                    tested: false },
-    { name: "Tiny Circuits Tinyduino",            value: "tinyduino",                  tested: false },
-    { name: "SparkFun Pro Micro	",                value: "sf-pro-micro",               tested: false },
-    { name: "Qtechknow Qduino",                   value: "qduino",                     tested: false },
-    { name: "Pinoccio Scout",                     value: "pinoccio",                   tested: false },
-    { name: "Femtoduino IMUduino",                value: "imuduino",                   tested: false },
-    { name: "Adafruit Feather 32u4 Basic Proto",  value: "feather",                    tested: false },
-    { name: "Adafruit Circuit Playground",        value: "circuit-playground-classic", tested: false },
-    { name: "BQ ZUM",                             value: "bqZum",                      tested: false },
-    { name: "BQ ZUM Core 2",                      value: "zumcore2",                   tested: false },
-    { name: "BQ ZUM Junior	",                    value: "zumjunior",                  tested: false },
+    { name: "小方v1", value: "nano (new bootloader)",      tested: true },
 
   ];
 
@@ -44,7 +27,7 @@ function App() {
   const handleSubmit = e => {
     e.preventDefault();
     updateUploadStatus("flashing");
-    updateUploadStatusTitle("Flashing Arduino...");
+    updateUploadStatusTitle("正在刷入...");
 
 
     const reader = new FileReader();
@@ -61,14 +44,14 @@ function App() {
       avrgirl.flash(filecontents, error => {
         if (error) {
           updateUploadStatus("error");
-          updateUploadStatusTitle("Error Flashing Arduino!");
+          updateUploadStatusTitle("刷入出错");
           updateUploadStatusMsg(error.message)
 
         } else {
           console.info("flash successful");
           updateUploadStatus("done");
-          updateUploadStatusTitle("Flash Sucessful!");
-          updateUploadStatusMsg("Successfully flashed the Arduino!");
+          updateUploadStatusTitle("刷入完成");
+          updateUploadStatusMsg("已成功刷入固件");
         }
       });
     };
@@ -91,7 +74,7 @@ function App() {
   return (
     <div className="w-full h-screen bg-gray-900">
       {!browserSupported && <div className="w-screen h-screen bg-opacity-90 fixed bg-gray-900 z-20 flex flex-col gap-2 justify-center items-center text-white text-lg text-center">
-        <h2 className="text-white text-4xl mb-6 font-bold">Browser is not supported😥</h2>
+        <h2 className="text-white text-4xl mb-6 font-bold">您的浏览器不支持WebSerial</h2>
         <p>Sorry, <b>Web Serial</b> is not supported on this browser.</p>
         <p>If you are on computer, please use Chrome or Opera</p>
         <p >If you are using Chrome, please make sure you're running Chrome 78 or later <br /> and have enabled the
@@ -119,7 +102,7 @@ function App() {
             <label htmlFor="dropzone-file" className={fileName ? 'hidden' : "relative p-4 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"} >
               <div className=" flex flex-col justify-center items-center pt-5 pb-6">
                 <svg aria-hidden="true" className="mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">点击上传</span>或直接将文件拖放至此</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Only .hex or .bin files</p>
               </div>
               <input id="dropzone-file"
@@ -142,8 +125,7 @@ function App() {
             }
           </div>
         </div>
-        <span className="text-gray-500 text-center w-1/2 text-xs mt-1">Wondering how to get hex/bin files from the sketch? <a className="underline" href="https://randomnerdtutorials.com/bin-binary-files-sketch-arduino-ide/">Click here</a></span>
-        <div className="w-2/3">
+       <div className="w-2/3">
           <div className="flex flex-row justify-between relative">
             <label htmlFor="board-select" className="block mb-2 mt-8 text-sm font-medium text-gray-900 dark:text-gray-400">Select an option</label>
             <button
@@ -181,6 +163,7 @@ function App() {
       <footer className="absolute bottom-2 text-gray-500 left-1/2 transform -translate-x-1/2 flex flex-col text-xs justify-center text-center">
         <span className="p-2">Built on <a className="underline text-blue-400" href="https://github.com/noopkat/avrgirl-arduino">avrgirl-arduino</a></span>
         <span>Any issues? Please report them <a className="underline text-blue-400" href="https://github.com/andreasNordstrand/arduino-web-flasher">here</a></span>
+        <span><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2025072622号</a></span>
       </footer>
     </div>
   );
