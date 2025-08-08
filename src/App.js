@@ -163,7 +163,7 @@ function App() {
       <footer className="absolute bottom-2 text-gray-500 left-1/2 transform -translate-x-1/2 flex flex-col text-xs justify-center text-center">
         <span className="p-2">Built on <a className="underline text-blue-400" href="https://github.com/noopkat/avrgirl-arduino">avrgirl-arduino</a></span>
         <span>Any issues? Please report them <a className="underline text-blue-400" href="https://github.com/andreasNordstrand/arduino-web-flasher">here</a></span>
-        <span><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2025072622号</a></span>
+        <span><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2025072622号-1</a></span>
       </footer>
     </div>
   );
